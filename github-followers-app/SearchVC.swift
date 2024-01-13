@@ -17,9 +17,12 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        usernameTextField.delegate = self
         configureImageView()
+        configureDismissKeyboard()
         view.addSubviews(views: logoImageView, usernameTextField, callToActionButton)
         activateConstraints()
+        callToActionButton.addTarget(self, action: #selector(pushFollowerList), for: .touchUpInside)
     }
     
     
@@ -32,6 +35,17 @@ class SearchVC: UIViewController {
     func configureImageView() {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(named: "gh-logo")
+    }
+    
+    
+    func configureDismissKeyboard() {
+        let tap = UITapGestureRecognizer(target: view.self, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    
+    @objc func pushFollowerList() {
+        
     }
     
     
@@ -52,5 +66,12 @@ class SearchVC: UIViewController {
             callToActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+}
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowerList()
+        return true
     }
 }
