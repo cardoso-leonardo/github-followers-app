@@ -13,6 +13,8 @@ class SearchVC: UIViewController {
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
     
+    var isUsernameEmpty: Bool { return usernameTextField.text!.isEmpty }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ class SearchVC: UIViewController {
         configureDismissKeyboard()
         view.addSubviews(views: logoImageView, usernameTextField, callToActionButton)
         activateConstraints()
-        callToActionButton.addTarget(self, action: #selector(pushFollowerList), for: .touchUpInside)
+        callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
     }
     
     
@@ -44,8 +46,12 @@ class SearchVC: UIViewController {
     }
     
     
-    @objc func pushFollowerList() {
-        
+    @objc func pushFollowerListVC() {
+        guard !isUsernameEmpty else { return }
+        let followerListVC = FollowerListVC()
+        followerListVC.username = usernameTextField.text
+        followerListVC.title = usernameTextField.text
+        navigationController?.pushViewController(followerListVC, animated: true)
     }
     
     
@@ -69,9 +75,10 @@ class SearchVC: UIViewController {
     }
 }
 
+
 extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        pushFollowerList()
+        pushFollowerListVC()
         return true
     }
 }
