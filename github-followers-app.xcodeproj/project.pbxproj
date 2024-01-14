@@ -19,6 +19,7 @@
 		27C598042B5335D30051F35C /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598032B5335D30051F35C /* FollowerListVC.swift */; };
 		27C598062B54A2720051F35C /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598052B54A2720051F35C /* GFTitleLabel.swift */; };
 		27C598082B54A4540051F35C /* GFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598072B54A4530051F35C /* GFBodyLabel.swift */; };
+		27C5980A2B54A54C0051F35C /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598092B54A54C0051F35C /* AlertVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		27C598032B5335D30051F35C /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 		27C598052B54A2720051F35C /* GFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
 		27C598072B54A4530051F35C /* GFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFBodyLabel.swift; sourceTree = "<group>"; };
+		27C598092B54A54C0051F35C /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				27C598032B5335D30051F35C /* FollowerListVC.swift */,
 				27C598052B54A2720051F35C /* GFTitleLabel.swift */,
 				27C598072B54A4530051F35C /* GFBodyLabel.swift */,
+				27C598092B54A54C0051F35C /* AlertVC.swift */,
 			);
 			path = "github-followers-app";
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				27C597FA2B4F62BC0051F35C /* SearchVC.swift in Sources */,
 				27C597E62B4F531E0051F35C /* AppDelegate.swift in Sources */,
 				27C598062B54A2720051F35C /* GFTitleLabel.swift in Sources */,
+				27C5980A2B54A54C0051F35C /* AlertVC.swift in Sources */,
 				27C598042B5335D30051F35C /* FollowerListVC.swift in Sources */,
 				27C597E82B4F531E0051F35C /* SceneDelegate.swift in Sources */,
 				27C598082B54A4540051F35C /* GFBodyLabel.swift in Sources */,
