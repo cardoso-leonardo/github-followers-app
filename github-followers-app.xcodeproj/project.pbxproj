@@ -72,23 +72,55 @@
 		27C597E42B4F531E0051F35C /* github-followers-app */ = {
 			isa = PBXGroup;
 			children = (
-				27C597E52B4F531E0051F35C /* AppDelegate.swift */,
-				27C597E72B4F531E0051F35C /* SceneDelegate.swift */,
+				27C598122B55DF1B0051F35C /* Extensions */,
+				27C598102B55DF0F0051F35C /* Custom Views */,
+				27C5980F2B55DF090051F35C /* Screens */,
+				27C598112B55DF170051F35C /* Support */,
+			);
+			path = "github-followers-app";
+			sourceTree = "<group>";
+		};
+		27C5980F2B55DF090051F35C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
 				27C597F92B4F62BC0051F35C /* SearchVC.swift */,
-				27C597FB2B4F62EB0051F35C /* FavoritesListVC.swift */,
-				27C597EE2B4F53200051F35C /* Assets.xcassets */,
-				27C597F02B4F53200051F35C /* LaunchScreen.storyboard */,
-				27C597F32B4F53200051F35C /* Info.plist */,
-				27C597FD2B50076A0051F35C /* GFButton.swift */,
-				27C597FF2B51CBFD0051F35C /* GFTextField.swift */,
-				27C598012B51D4600051F35C /* UIView+Ext.swift */,
-				27C5980D2B54ADEC0051F35C /* UIVIewController+Ext.swift */,
 				27C598032B5335D30051F35C /* FollowerListVC.swift */,
+				27C597FB2B4F62EB0051F35C /* FavoritesListVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		27C598102B55DF0F0051F35C /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
 				27C598052B54A2720051F35C /* GFTitleLabel.swift */,
 				27C598072B54A4530051F35C /* GFBodyLabel.swift */,
 				27C598092B54A54C0051F35C /* AlertVC.swift */,
+				27C597FD2B50076A0051F35C /* GFButton.swift */,
+				27C597FF2B51CBFD0051F35C /* GFTextField.swift */,
 			);
-			path = "github-followers-app";
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		27C598112B55DF170051F35C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				27C597E52B4F531E0051F35C /* AppDelegate.swift */,
+				27C597E72B4F531E0051F35C /* SceneDelegate.swift */,
+				27C597EE2B4F53200051F35C /* Assets.xcassets */,
+				27C597F02B4F53200051F35C /* LaunchScreen.storyboard */,
+				27C597F32B4F53200051F35C /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		27C598122B55DF1B0051F35C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				27C598012B51D4600051F35C /* UIView+Ext.swift */,
+				27C5980D2B54ADEC0051F35C /* UIVIewController+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
