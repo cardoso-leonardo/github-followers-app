@@ -26,6 +26,11 @@ class FollowerCell: UICollectionViewCell {
     }
     
     
+    func set(follower: Follower) {
+        username.text = follower.login
+    }
+    
+    
     private func configure() {
         addSubviews(views: avatarImage, username)
         
