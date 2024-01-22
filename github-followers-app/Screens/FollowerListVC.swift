@@ -9,8 +9,13 @@ import UIKit
 
 class FollowerListVC: UIViewController {
 
+    enum Section {
+        case main
+    }
+    
     var username: String!
     var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +63,20 @@ class FollowerListVC: UIViewController {
         NetworkManager.shared.fetchFollowers(username: username, page: 1) { result in
             switch result {
             case .success(let followers):
-                print(followers.count)
                 print(followers)
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
             }
         }
+    }
+    
+    
+    func configureDiffableDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexPath) as! FollowerCell
+            cell.set(follower: itemIdentifier)
+            return cell
+        })
     }
     
 }
