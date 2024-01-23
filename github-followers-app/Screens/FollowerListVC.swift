@@ -14,6 +14,8 @@ class FollowerListVC: UIViewController {
     }
     
     var username: String!
+    var followers: [Follower] = []
+    
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
@@ -22,6 +24,7 @@ class FollowerListVC: UIViewController {
         configureViewController()
         configureCollectionView()
         getFollowers()
+        configureDiffableDataSource()
     }
     
     
@@ -63,7 +66,8 @@ class FollowerListVC: UIViewController {
         NetworkManager.shared.fetchFollowers(username: username, page: 1) { result in
             switch result {
             case .success(let followers):
-                print(followers)
+                self.followers = followers
+                self.updateData()
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
             }
@@ -71,12 +75,20 @@ class FollowerListVC: UIViewController {
     }
     
     
-    func configureDiffableDataSource() {
+    private func configureDiffableDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexPath) as! FollowerCell
             cell.set(follower: itemIdentifier)
             return cell
         })
+    }
+    
+    
+    private func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(followers)
+        DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
     
 }
