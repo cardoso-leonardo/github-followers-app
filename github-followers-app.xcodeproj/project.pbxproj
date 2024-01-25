@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2725FDD82B60695100F2B49D /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725FDD72B60695100F2B49D /* UIHelper.swift */; };
+		2725FDE02B61E00F00F2B49D /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725FDDF2B61E00F00F2B49D /* GFEmptyStateView.swift */; };
 		27C597E62B4F531E0051F35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C597E52B4F531E0051F35C /* AppDelegate.swift */; };
 		27C597E82B4F531E0051F35C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C597E72B4F531E0051F35C /* SceneDelegate.swift */; };
 		27C597EF2B4F53200051F35C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27C597EE2B4F53200051F35C /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		2725FDD72B60695100F2B49D /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		2725FDDF2B61E00F00F2B49D /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		27C597E22B4F531E0051F35C /* github-followers-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-followers-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C597E52B4F531E0051F35C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27C597E72B4F531E0051F35C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				27C598132B55E1D10051F35C /* GFAlertContainerView.swift */,
+				2725FDDF2B61E00F00F2B49D /* GFEmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				27C598062B54A2720051F35C /* GFTitleLabel.swift in Sources */,
 				27C598212B59E18F0051F35C /* FollowerCell.swift in Sources */,
 				27C5981F2B5884EA0051F35C /* GFError.swift in Sources */,
+				2725FDE02B61E00F00F2B49D /* GFEmptyStateView.swift in Sources */,
 				27C5980A2B54A54C0051F35C /* AlertVC.swift in Sources */,
 				27C598042B5335D30051F35C /* FollowerListVC.swift in Sources */,
 				27C597E82B4F531E0051F35C /* SceneDelegate.swift in Sources */,
