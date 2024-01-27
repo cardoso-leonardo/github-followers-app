@@ -70,7 +70,7 @@ class FollowerListVC: UIViewController {
             
             switch result {
             case .success(let followers):
-                if followers.count < 100 { hasMoreFollowers = false }
+                if followers.count < 100 { self.hasMoreFollowers = false }
                 self.followers.append(contentsOf: followers)
                 
                 if self.followers.isEmpty {
@@ -81,7 +81,7 @@ class FollowerListVC: UIViewController {
                     return
                 }
                 
-                self.updateData(on: followers)
+                self.updateData(on: self.followers)
                 
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
@@ -124,11 +124,13 @@ extension FollowerListVC: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let follower = isSearching ? filteredFollowers[indexPath.item] : followers[indexPath.item]
+        let activeArray = isSearching ? filteredFollowers : followers
+        let follower = activeArray[indexPath.item]
         let destVC = UserInfoVC()
         destVC.username = follower.login
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
+        updateData(on: followers)
     }
     
 }
