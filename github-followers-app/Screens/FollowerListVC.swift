@@ -56,7 +56,7 @@ class FollowerListVC: UIViewController {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for a username"
         navigationItem.searchController = searchController
     }
@@ -130,7 +130,6 @@ extension FollowerListVC: UICollectionViewDelegate {
         destVC.username = follower.login
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
-        updateData(on: followers)
     }
     
 }
