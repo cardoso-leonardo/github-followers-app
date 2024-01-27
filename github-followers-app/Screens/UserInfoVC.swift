@@ -17,7 +17,6 @@ class UserInfoVC: UIViewController {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
         navigationItem.rightBarButtonItem = doneButton
         navigationItem.title = username!
-        print(username!)
     }
 
     
