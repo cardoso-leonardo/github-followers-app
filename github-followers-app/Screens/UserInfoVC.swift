@@ -17,6 +17,15 @@ class UserInfoVC: UIViewController {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
         navigationItem.rightBarButtonItem = doneButton
         navigationItem.title = username!
+        
+        NetworkManager.shared.fetchUserData(username: username!) { result in
+            switch result {
+            case .success(let user):
+                print(user)
+            case .failure(_):
+                break
+            }
+        }
     }
 
     
