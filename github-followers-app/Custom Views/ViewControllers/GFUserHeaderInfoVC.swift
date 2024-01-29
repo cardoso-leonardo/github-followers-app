@@ -10,16 +10,18 @@ import UIKit
 class GFUserHeaderInfoVC: UIViewController {
     
     private var avatarImageView = GFAvatarImageView(frame: .zero)
-    private var usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 38)
-    private var secondaryLabel = GFMediumLabel(fontSize: 28)
+    private var usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
+    private var nameLabel = GFMediumLabel(fontSize: 18)
     private var locationImage = UIImageView()
-    private var locationLabel = GFMediumLabel(fontSize: 28)
+    private var locationLabel = GFMediumLabel(fontSize: 18)
     private var bioLabel = GFBodyLabel(textAlignment: .left)
     
     private var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutUI()
+        configureUI()
         
     }
     
@@ -36,15 +38,56 @@ class GFUserHeaderInfoVC: UIViewController {
 
     
     private func configureUI() {
+        avatarImageView.downloadImage(url: user.avatarUrl)
+        usernameLabel.text = user.login
+        nameLabel.text = user.name ?? ""
+        locationImage.image = UIImage(systemName: "mappin.and.ellipse")
+        locationLabel.text = user.location ?? "Location not found"
         
+        bioLabel.numberOfLines = 3
+        bioLabel.text = user.bio ?? "No bio"
     }
     
     
     private func layoutUI() {
-        view.addSubviews(views:avatarImageView, usernameLabel, secondaryLabel, locationImage, locationLabel, bioLabel)
+        view.addSubviews(views:avatarImageView, usernameLabel, nameLabel, locationImage, locationLabel, bioLabel)
         locationImage.translatesAutoresizingMaskIntoConstraints = false
         
+        let padding: CGFloat = 20
+        let textImagePadding: CGFloat = 12
         
+        NSLayoutConstraint.activate([
+        
+            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 90),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 90),
+            
+            usernameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
+            usernameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            usernameLabel.heightAnchor.constraint(equalToConstant: 38),
+            
+            nameLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: 8),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
+            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            nameLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            locationImage.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
+            locationImage.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
+            locationImage.widthAnchor.constraint(equalToConstant: 20),
+            locationImage.heightAnchor.constraint(equalToConstant: 20),
+            
+            locationLabel.centerYAnchor.constraint(equalTo: locationImage.centerYAnchor),
+            locationLabel.leadingAnchor.constraint(equalTo: locationImage.trailingAnchor, constant: 5),
+            locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            locationLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
+            bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor, constant: padding),
+            bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            bioLabel.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
     
     
