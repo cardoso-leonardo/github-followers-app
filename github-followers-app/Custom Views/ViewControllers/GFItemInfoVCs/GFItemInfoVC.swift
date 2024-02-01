@@ -16,6 +16,8 @@ class GFItemInfoVC: UIViewController {
     
     var user: User!
     
+    weak var delegate: UserInfoVCDelegate?
+    
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -33,6 +35,7 @@ class GFItemInfoVC: UIViewController {
         layoutUI()
         configure()
         configureStackView()
+        configureActionButton()
     }
     
     
@@ -40,6 +43,14 @@ class GFItemInfoVC: UIViewController {
         view.backgroundColor = .secondarySystemBackground
         view.layer.cornerRadius = 18
     }
+    
+    
+    private func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+    
+    
+    @objc func actionButtonTapped() {}
     
     
     private func configureStackView() {
