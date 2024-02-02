@@ -45,6 +45,8 @@ class FollowerListVC: UIViewController {
     private func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     
@@ -109,6 +111,11 @@ class FollowerListVC: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
+    }
+    
+    
+    @objc func addButtonTapped() {
+        
     }
     
 }
