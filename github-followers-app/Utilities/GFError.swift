@@ -16,8 +16,8 @@ enum GFError: String, Error {
     case invalidData = "The data received from the server was invalid. Please try again."
     
     //MARK: PersistenceManager
-    case unableToRetrieveFavorites = "Unable to retrieve favorites. Please try again later"
-    case unableToSaveFavorites = "Unable to save favorites"
-    case alreadyMarkedAsFavorite = "This user has already been marked as favorites"
+    case unableToRetrieveFavorites = "Unable to retrieve favorites. Please try again later."
+    case unableToSaveFavorites = "Unable to save favorites."
+    case alreadyMarkedAsFavorite = "This user has already been marked as favorites."
 }
 
