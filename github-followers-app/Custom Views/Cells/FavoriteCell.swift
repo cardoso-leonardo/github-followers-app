@@ -9,15 +9,46 @@ import UIKit
 
 class FavoriteCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let reuseID = "FavoriteCell"
+    
+    let avatarImage = GFAvatarImageView(frame: .zero)
+    let username = GFTitleLabel(textAlignment: .left, fontSize: 26)
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func set(favorite: Follower) {
+        username.text = favorite.login
+        avatarImage.downloadImage(url: favorite.avatarUrl)
+    }
+    
+    
+    private func configure() {
+        addSubviews(views: avatarImage, username)
+        accessoryType = .disclosureIndicator
+        
+        let padding: CGFloat = 12
+        
+        NSLayoutConstraint.activate([
+            avatarImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            avatarImage.widthAnchor.constraint(equalToConstant: 60),
+            avatarImage.heightAnchor.constraint(equalToConstant: 60),
+            
+            username.centerYAnchor.constraint(equalTo: centerYAnchor),
+            username.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 24),
+            username.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            username.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 
 }
