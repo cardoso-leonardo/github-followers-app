@@ -9,39 +9,38 @@ import UIKit
 
 class FavoritesListVC: UIViewController {
     
-    private var tableView: UITableView!
-    
+    private let tableView = UITableView()
     private var favorites: [Follower] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
-        fetchFavorites()
+        configureViewController()
         configureTableView()
-        layoutUI()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchFavorites()
+    }
     
     
     private func configureTableView() {
-        tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 80
+        
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
     }
     
     
-    private func layoutUI() {
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    private func configureViewController() {
+        view.backgroundColor = .systemBackground
+        title = "Favorites"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     
@@ -50,7 +49,14 @@ class FavoritesListVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                self.favorites = favorites
+                if favorites.isEmpty {
+                    self.showEmptyStateView(with: "No followers yet 😅", in: self.view)
+                } else {
+                    self.favorites = favorites
+                    tableView.reloadData()
+                    self.view.bringSubviewToFront(tableView)
+                }
+                
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Oops", message: error.rawValue, buttonTitle: "Ok")
             }
@@ -68,17 +74,34 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = FavoriteCell(style: .default, reuseIdentifier: FavoriteCell.reuseID)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as! FavoriteCell
         cell.set(favorite: favorites[indexPath.row])
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let userVC = UserInfoVC()
-        userVC.username = favorites[indexPath.row].login
-        self.present(userVC, animated: true)
+        let destVC = FollowerListVC()
+        let favorite = favorites[indexPath.row]
+        destVC.username = favorite.login
+        destVC.title = favorite.login
+        navigationController?.pushViewController(destVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        let favorite = favorites[indexPath.row]
+        favorites.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
+        
+        PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else { return }
+            self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+        }
+        
     }
     
 }
