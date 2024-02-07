@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlertVC: UIViewController {
+class GFAlertVC: UIViewController {
     
     let containerView = GFAlertContainerView()
     let titleLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
