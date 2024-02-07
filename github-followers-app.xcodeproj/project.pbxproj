@@ -42,6 +42,7 @@
 		27C5981F2B5884EA0051F35C /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5981E2B5884EA0051F35C /* GFError.swift */; };
 		27C598212B59E18F0051F35C /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598202B59E18F0051F35C /* FollowerCell.swift */; };
 		27C598242B59E1C90051F35C /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C598232B59E1C90051F35C /* GFAvatarImageView.swift */; };
+		27CBC27E2B7440DB008B36DE /* GFDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CBC27D2B7440DB008B36DE /* GFDataLoadingVC.swift */; };
 		27FE3CF42B72E9D800F78294 /* GFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FE3CF32B72E9D800F78294 /* GFTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		27C5981E2B5884EA0051F35C /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 		27C598202B59E18F0051F35C /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		27C598232B59E1C90051F35C /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
+		27CBC27D2B7440DB008B36DE /* GFDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingVC.swift; sourceTree = "<group>"; };
 		27FE3CF32B72E9D800F78294 /* GFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 				278EFA142B69A27B00561BD4 /* GFItemInfoVCs */,
 				27C598092B54A54C0051F35C /* GFAlertVC.swift */,
 				278EFA0A2B68608A00561BD4 /* GFUserHeaderInfoVC.swift */,
+				27CBC27D2B7440DB008B36DE /* GFDataLoadingVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				27C598062B54A2720051F35C /* GFTitleLabel.swift in Sources */,
 				27C598212B59E18F0051F35C /* FollowerCell.swift in Sources */,
 				27FE3CF42B72E9D800F78294 /* GFTabBarController.swift in Sources */,
+				27CBC27E2B7440DB008B36DE /* GFDataLoadingVC.swift in Sources */,
 				27C5981F2B5884EA0051F35C /* GFError.swift in Sources */,
 				2725FDE02B61E00F00F2B49D /* GFEmptyStateView.swift in Sources */,
 				27C5980A2B54A54C0051F35C /* GFAlertVC.swift in Sources */,
