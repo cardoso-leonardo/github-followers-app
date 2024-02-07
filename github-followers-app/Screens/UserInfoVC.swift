@@ -73,7 +73,7 @@ final class UserInfoVC: GFDataLoadingVC {
         self.add(childVC: repoInfoVC, to: self.itemViewOne)
         self.add(childVC: followerInfoVC, to: self.itemViewTwo)
         self.add(childVC: GFUserHeaderInfoVC(user: user), to: self.headerView)
-        self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
+        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
     }
     
     
