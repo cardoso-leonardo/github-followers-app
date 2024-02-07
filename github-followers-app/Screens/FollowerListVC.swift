@@ -15,16 +15,16 @@ class FollowerListVC: UIViewController {
 
     enum Section { case main }
     
-    var username: String!
-    var followers: [Follower] = []
-    var filteredFollowers: [Follower] = []
+    private var username: String!
+    private var followers: [Follower] = []
+    private var filteredFollowers: [Follower] = []
     
-    var page: Int = 1
-    var hasMoreFollowers: Bool = true
-    var isSearching: Bool = false
+    private var page: Int = 1
+    private var hasMoreFollowers: Bool = true
+    private var isSearching: Bool = false
     
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     
     override func viewDidLoad() {
@@ -39,6 +39,18 @@ class FollowerListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    
+    init(username: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.username = username
+        title = username
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
