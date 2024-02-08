@@ -41,7 +41,7 @@ class GFUserHeaderInfoVC: UIViewController {
         downloadImage()
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? ""
-        locationImage.image = UIImage(systemName: SFSymbols.location)
+        locationImage.image = SFSymbols.location
         locationImage.tintColor = .label
         locationLabel.text = user.location ?? "Location not found"
         

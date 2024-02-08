@@ -57,7 +57,7 @@ final class FollowerListVC: GFDataLoadingVC {
     private func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(addButtonTapped))
+        let addButton = UIBarButtonItem(image: SFSymbols.heart, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }
     
