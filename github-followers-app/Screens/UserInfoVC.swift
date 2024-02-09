@@ -8,14 +8,13 @@
 import UIKit
 
 protocol UserInfoVCDelegate: AnyObject {
-    func didTapGithubPageButton(with user: User)
-    func didTapGetFollowersButton(for user: User)
+    func didTapGetFollowersButton(for username: String)
 }
 
 final class UserInfoVC: GFDataLoadingVC {
     
     var username: String!
-    weak var delegate: FollowerListVCDelegate?
+    weak var delegate: UserInfoVCDelegate?
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -96,7 +95,7 @@ final class UserInfoVC: GFDataLoadingVC {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 200),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemViewHeight),
@@ -105,7 +104,7 @@ final class UserInfoVC: GFDataLoadingVC {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemViewHeight),
             
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -117,7 +116,7 @@ final class UserInfoVC: GFDataLoadingVC {
 }
 
 
-extension UserInfoVC: UserInfoVCDelegate {
+extension UserInfoVC: ItemInfoVCDelegate {
     
     func didTapGithubPageButton(with user: User) {
         guard let url = URL(string: user.htmlUrl) else {
