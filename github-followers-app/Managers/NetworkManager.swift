@@ -9,13 +9,14 @@ import UIKit
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
-    let cache = NSCache<NSString, UIImage>()
+    static let shared   = NetworkManager()
+    let cache           = NSCache<NSString, UIImage>()
     
     private init() {}
     
     private let baseURL: String = "https://api.github.com/users/"
-    private let per_page: Int = 100
+    private let per_page: Int   = 100
+    
     
     func fetchFollowers(username: String, page: Int, onCompletion: @escaping (Result<[Follower], GFError>) -> Void) {
         let endpoint = baseURL + "\(username)/followers?per_page=\(per_page)&page=\(page)"
@@ -54,7 +55,6 @@ class NetworkManager {
             
         }
         task.resume()
-        
     }
     
     
@@ -85,8 +85,9 @@ class NetworkManager {
             
             do {
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.keyDecodingStrategy  = .convertFromSnakeCase
                 decoder.dateDecodingStrategy = .iso8601
+                
                 let user = try decoder.decode(User.self, from: data)
                 onCompletion(.success(user))
             } catch {
@@ -95,12 +96,10 @@ class NetworkManager {
             
         }
         task.resume()
-        
     }
     
     
     func downloadImage(url urlString: String, onCompletion: @escaping (UIImage?) -> Void) {
-        
         let cacheKey = NSString(string: urlString)
         
         if let image = cache.object(forKey: cacheKey) {
@@ -130,5 +129,4 @@ class NetworkManager {
         task.resume()
     }
 
-    
 }

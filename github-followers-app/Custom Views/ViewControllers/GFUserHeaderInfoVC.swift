@@ -9,20 +9,20 @@ import UIKit
 
 class GFUserHeaderInfoVC: UIViewController {
     
-    private var avatarImage = GFAvatarImageView(frame: .zero)
-    private var usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
-    private var nameLabel = GFMediumLabel(fontSize: 18)
-    private var locationImage = UIImageView()
-    private var locationLabel = GFMediumLabel(fontSize: 18)
-    private var bioLabel = GFBodyLabel(textAlignment: .left)
+    private var avatarImage     = GFAvatarImageView(frame: .zero)
+    private var usernameLabel   = GFTitleLabel(textAlignment: .left, fontSize: 34)
+    private var nameLabel       = GFMediumLabel(fontSize: 18)
+    private var locationImage   = UIImageView()
+    private var locationLabel   = GFMediumLabel(fontSize: 18)
+    private var bioLabel        = GFBodyLabel(textAlignment: .left)
     
     private var user: User!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutUI()
         configureUI()
-        
     }
     
     
@@ -38,23 +38,16 @@ class GFUserHeaderInfoVC: UIViewController {
 
     
     private func configureUI() {
-        downloadImage()
-        usernameLabel.text = user.login
-        nameLabel.text = user.name ?? ""
-        locationImage.image = SFSymbols.location
+        avatarImage.downloadImage(fromURL: user.avatarUrl)
+        usernameLabel.text      = user.login
+        nameLabel.text          = user.name ?? ""
+
+        locationImage.image     = SFSymbols.location
         locationImage.tintColor = .label
-        locationLabel.text = user.location ?? "Location not found"
+        locationLabel.text      = user.location ?? "Location not found"
         
-        bioLabel.text = user.bio ?? "No bio"
-        bioLabel.numberOfLines = 3
-    }
-    
-    
-    private func downloadImage() {
-        NetworkManager.shared.downloadImage(url: user.avatarUrl) { [weak self] image in
-            guard let self = self else {return }
-            DispatchQueue.main.async { self.avatarImage.image = image }
-        }
+        bioLabel.text           = user.bio ?? "No bio"
+        bioLabel.numberOfLines  = 3
     }
     
     
@@ -66,7 +59,6 @@ class GFUserHeaderInfoVC: UIViewController {
         let textImagePadding: CGFloat = 12
         
         NSLayoutConstraint.activate([
-        
             avatarImage.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
             avatarImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             avatarImage.widthAnchor.constraint(equalToConstant: 90),

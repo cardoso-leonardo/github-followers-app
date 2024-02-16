@@ -27,10 +27,10 @@ class GFMediumLabel: UILabel {
     
     
     private func configure() {
-        lineBreakMode = .byTruncatingTail
-        textColor = .secondaryLabel
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.90
+        lineBreakMode               = .byTruncatingTail
+        textColor                   = .secondaryLabel
+        adjustsFontSizeToFitWidth   = true
+        minimumScaleFactor          = 0.90
         
         translatesAutoresizingMaskIntoConstraints = false
     }

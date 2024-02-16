@@ -9,10 +9,10 @@ import UIKit
 
 class GFItemInfoVC: UIViewController {
 
-    private let stackView = UIStackView()
-    let itemInfoOne = GFItemInfoView()
-    let itemInfoTwo = GFItemInfoView()
-    let actionButton = GFButton()
+    private let stackView   = UIStackView()
+    let itemInfoOne         = GFItemInfoView()
+    let itemInfoTwo         = GFItemInfoView()
+    let actionButton        = GFButton()
     
     var user: User!
     

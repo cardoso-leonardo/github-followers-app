@@ -9,8 +9,8 @@ import UIKit
 
 final class FavoritesListVC: GFDataLoadingVC {
     
-    private let tableView = UITableView()
-    private var favorites: [Follower] = []
+    private let tableView               = UITableView()
+    private var favorites: [Follower]   = []
 
     
     override func viewDidLoad() {
@@ -28,10 +28,10 @@ final class FavoritesListVC: GFDataLoadingVC {
     
     private func configureTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 80
+        tableView.frame         = view.bounds
+        tableView.delegate      = self
+        tableView.dataSource    = self
+        tableView.rowHeight     = 80
         tableView.removeExcessCells()
         
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
@@ -50,17 +50,21 @@ final class FavoritesListVC: GFDataLoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No followers yet 😅", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    tableView.reloadData()
-                    self.view.bringSubviewToFront(tableView)
-                }
-                
+                self.showFavorites(with: favorites)
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Oops", message: error.rawValue, buttonTitle: "Ok")
             }
+        }
+    }
+    
+    
+    private func showFavorites(with favorites: [Follower]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "No followers yet 😅", in: self.view)
+        } else {
+            self.favorites = favorites
+            tableView.reloadData()
+            self.view.bringSubviewToFront(tableView)
         }
     }
 
@@ -82,8 +86,8 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favorite = favorites[indexPath.row]
-        let destVC = FollowerListVC(username: favorite.login)
+        let favorite    = favorites[indexPath.row]
+        let destVC      = FollowerListVC(username: favorite.login)
         navigationController?.pushViewController(destVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -101,7 +105,6 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
             }
             self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
         }
-        
     }
     
 }

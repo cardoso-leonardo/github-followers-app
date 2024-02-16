@@ -13,8 +13,8 @@ enum ItemInfoType {
 
 class GFItemInfoView: UIView {
 
-    private let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 14)
-    private let countLabel = GFTitleLabel(textAlignment: .center, fontSize: 14)
+    private let titleLabel      = GFTitleLabel(textAlignment: .left, fontSize: 14)
+    private let countLabel      = GFTitleLabel(textAlignment: .center, fontSize: 14)
     private let symbolImageView = UIImageView()
     
     
