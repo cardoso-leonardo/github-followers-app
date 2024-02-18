@@ -80,17 +80,20 @@ final class FollowerListVC: GFDataLoadingVC {
     private func getFollowers(username: String, page: Int) {
         showLoadingView()
         isLoadingMoreData = true
-        NetworkManager.shared.fetchFollowers(username: username, page: page) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                self.updateUI(with: followers)
-            case .failure(let error):
-                self.presentAlertOnMainThread(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
+        
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.fetchFollowers(username: username, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentAlertVC(title: "Ooops", message: gfError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultAlert()
+                }
+                dismissLoadingView()
             }
-            self.isLoadingMoreData = false
         }
     }
     
@@ -121,7 +124,7 @@ final class FollowerListVC: GFDataLoadingVC {
             case .success(let user):
                 self.addToFavorite(with: user)
             case .failure(let error):
-                presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+                presentAlertVC(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
@@ -133,10 +136,10 @@ final class FollowerListVC: GFDataLoadingVC {
         PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
             guard let self = self else { return }
             guard let error = error else {
-                presentAlertOnMainThread(title: "Success!", message: "This user is now marked as favorite 🎉.", buttonTitle: "Hooray!")
+                presentAlertVC(title: "Success!", message: "This user is now marked as favorite 🎉.", buttonTitle: "Hooray!")
                 return
             }
-            presentAlertOnMainThread(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
+            presentAlertVC(title: "Ooops", message: error.rawValue, buttonTitle: "Ok")
         }
     }
     

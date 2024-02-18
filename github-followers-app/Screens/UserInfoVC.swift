@@ -131,7 +131,7 @@ extension UserInfoVC: GFRepoInfoVCDelegate, GFFollowerInfoVCDelegate {
     
     func didTapGithubPageButton(with user: User) {
         guard let url = URL(string: user.htmlUrl) else {
-            presentAlertOnMainThread(title: "Invalid URL", message: "This user does not have a valid URL.", buttonTitle: "Ok")
+            presentAlertVC(title: "Invalid URL", message: "This user does not have a valid URL.", buttonTitle: "Ok")
             return
         }
         presentSafariVC(with: url)
@@ -140,7 +140,7 @@ extension UserInfoVC: GFRepoInfoVCDelegate, GFFollowerInfoVCDelegate {
     
     func didTapGetFollowersButton(for user: User) {
         guard user.followers != 0 else {
-            presentAlertOnMainThread(title: "Sad news", message: "This user has no followers at all 😞. You should be the first", buttonTitle: "So sad")
+            presentAlertVC(title: "Sad news", message: "This user has no followers at all 😞. You should be the first", buttonTitle: "So sad")
             return
         }
         delegate?.didTapGetFollowersButton(for: user.login)

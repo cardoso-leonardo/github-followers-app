@@ -11,50 +11,35 @@ class NetworkManager {
     
     static let shared   = NetworkManager()
     let cache           = NSCache<NSString, UIImage>()
+    let decoder         = JSONDecoder()
     
-    private init() {}
+    private init() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
     private let baseURL: String = "https://api.github.com/users/"
     private let per_page: Int   = 100
     
     
-    func fetchFollowers(username: String, page: Int, onCompletion: @escaping (Result<[Follower], GFError>) -> Void) {
+    func fetchFollowers(username: String, page: Int) async throws -> [Follower] {
         let endpoint = baseURL + "\(username)/followers?per_page=\(per_page)&page=\(page)"
         
         guard let url = URL(string: endpoint) else {
-            onCompletion(.failure(.invalidUsername))
-            return
+            throw GFError.invalidUsername
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let _ = error {
-                onCompletion(.failure(.unableToComplete))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                onCompletion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                onCompletion(.failure(.invalidData))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                let followers = try decoder.decode([Follower].self, from: data)
-                onCompletion(.success(followers))
-            } catch {
-                onCompletion(.failure(.invalidData))
-            }
-            
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw GFError.invalidResponse
         }
-        task.resume()
+        
+        do {
+            return try decoder.decode([Follower].self, from: data)
+        } catch {
+            throw GFError.invalidData
+        }
     }
     
     
@@ -84,11 +69,7 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy  = .convertFromSnakeCase
-                decoder.dateDecodingStrategy = .iso8601
-                
-                let user = try decoder.decode(User.self, from: data)
+                let user = try self.decoder.decode(User.self, from: data)
                 onCompletion(.success(user))
             } catch {
                 onCompletion(.failure(.invalidData))
@@ -119,14 +100,14 @@ class NetworkManager {
                   response.statusCode == 200,
                   let data = data,
                   let image = UIImage(data: data) else {
-                    onCompletion(nil)
-                    return
-                }
+                onCompletion(nil)
+                return
+            }
             
             self.cache.setObject(image, forKey: cacheKey)
             onCompletion(image)
         }
         task.resume()
     }
-
+    
 }

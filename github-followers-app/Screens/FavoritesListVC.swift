@@ -52,7 +52,7 @@ final class FavoritesListVC: GFDataLoadingVC {
             case .success(let favorites):
                 self.showFavorites(with: favorites)
             case .failure(let error):
-                self.presentAlertOnMainThread(title: "Oops", message: error.rawValue, buttonTitle: "Ok")
+                self.presentAlertVC(title: "Oops", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
@@ -103,7 +103,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
                 tableView.deleteRows(at: [indexPath], with: .left)
                 return
             }
-            self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            self.presentAlertVC(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
         }
     }
     
