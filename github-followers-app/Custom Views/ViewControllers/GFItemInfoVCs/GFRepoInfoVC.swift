@@ -36,7 +36,7 @@ final class GFRepoInfoVC: GFItemInfoVC {
     private func configure() {
         itemInfoOne.set(type: .repos, with: user.publicRepos)
         itemInfoTwo.set(type: .gists, with: user.publicGists)
-        actionButton.set(backgroundColor: .systemPurple, title: "Github page")
+        actionButton.set(color: .systemPurple, title: "Github page", systemImageName: "folder", imagePlacement: .leading)
     }
     
     
