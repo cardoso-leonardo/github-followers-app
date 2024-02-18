@@ -66,15 +66,9 @@ final class UserInfoVC: GFDataLoadingVC {
     
     
     private func fetchUser() {
-        NetworkManager.shared.fetchUserData(username: username!) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async { self.configureUIElements(with: user) }
-            case .failure(_):
-                break
-            }
+        Task {
+            let user = try await NetworkManager.shared.fetchUserData(username: username)
+            configureUIElements(with: user)
         }
     }
     
