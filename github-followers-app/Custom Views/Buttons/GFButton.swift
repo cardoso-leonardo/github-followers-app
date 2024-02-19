@@ -45,3 +45,7 @@ class GFButton: UIButton {
     }
     
 }
+
+#Preview() {
+    GFButton(color: .purple, title: "Teste", systemImageName: "pencil", imagePlacement: .leading)
+}
