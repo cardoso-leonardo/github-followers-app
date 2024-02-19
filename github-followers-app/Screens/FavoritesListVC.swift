@@ -11,7 +11,7 @@ final class FavoritesListVC: GFDataLoadingVC {
     
     private let tableView               = UITableView()
     private var favorites: [Follower]   = []
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,21 @@ final class FavoritesListVC: GFDataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFavorites()
+    }
+    
+    
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if favorites.isEmpty {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "star")
+            config.text = "No favorites added"
+            config.secondaryText = "Add a favorite in followers list"
+            
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+        
     }
     
     
@@ -59,13 +74,13 @@ final class FavoritesListVC: GFDataLoadingVC {
     
     
     private func showFavorites(with favorites: [Follower]) {
-        if favorites.isEmpty {
-            self.showEmptyStateView(with: "No followers yet 😅", in: self.view)
-        } else {
-            self.favorites = favorites
-            tableView.reloadData()
-            self.view.bringSubviewToFront(tableView)
+        self.favorites = favorites
+        setNeedsUpdateContentUnavailableConfiguration()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
         }
+        
     }
 
 }
@@ -101,9 +116,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
             guard let error else {
                 favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No followers yet 😅", in: self.view)
-                }
+                setNeedsUpdateContentUnavailableConfiguration()
                 return
             }
             self.presentAlertVC(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
