@@ -10,15 +10,10 @@ import SwiftUI
 
 class FollowerCell: UICollectionViewCell {
     
-    static let reuseID      = "FollowerCell"
-    
-    private let avatarImage = GFAvatarImageView(frame: .zero)
-    private let username    = GFTitleLabel(textAlignment: .center, fontSize: 16)
-    
-    
+    static let reuseID = "FollowerCell"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
     }
     
     
@@ -28,33 +23,7 @@ class FollowerCell: UICollectionViewCell {
     
     
     func set(follower: Follower) {
-        
-        if #available(iOS 16.0, *) {
-            contentConfiguration = UIHostingConfiguration { FollowerView(follower: follower) }
-        } else {
-            username.text = follower.login
-            avatarImage.downloadImage(fromURL: follower.avatarUrl)
-        }
-    }
-    
-    
-    private func configure() {
-        addSubviews(views: avatarImage, username)
-        
-        let padding: CGFloat = 8
-        
-        NSLayoutConstraint.activate([
-            avatarImage.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            avatarImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            avatarImage.heightAnchor.constraint(equalTo: avatarImage.widthAnchor),
-            
-            username.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 12),
-            username.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            username.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            username.heightAnchor.constraint(equalToConstant: 20)
-        
-        ])
+        contentConfiguration = UIHostingConfiguration { FollowerView(follower: follower) }
     }
     
 }
